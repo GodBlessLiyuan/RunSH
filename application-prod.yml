@@ -1,0 +1,66 @@
+server:
+ port: 8105
+ tomcat:
+  uri-encoding: UTF-8
+spring:
+  application:
+    name: basicmanage-yh
+  jackson:
+    serialization:
+      indent-output: true
+      fail-on-empty-beans: true
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+08
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/smartyinghong?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: '!qaZXSw2'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 1
+      max-lifetime: 1740000
+      connection-test-query: SELECT 1
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 100MB
+      max-file-size: 100MB
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    timeout: 1000
+  security:
+    user:
+      name: vbooster
+      password: 123456a
+   
+token:
+  header: Authorization
+  secret: abcdefghijklmnopqrstuvwxyz
+  expireTime: 3000
+
+mybatis:
+  mapper-locations: com/smartindustry/common/mapper/**/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:8030/eureka/
+
+logging:
+  level:
+    com:
+      smartindustry:
+        common:
+          mapper: debug
+  config: /data/smartindustry/yinghong/wms/basicmanage/logback-spring-prod.xml
+config:
+ file:
+  localPath: /data/ftp/smartindustry/
+  publicPath: http://dev.smartindustry.vbooster.cn
+  tmpPath: /data/tmp/
+
+
